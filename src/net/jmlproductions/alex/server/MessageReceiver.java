@@ -3,18 +3,18 @@ package net.jmlproductions.alex.server;
 public class MessageReceiver
 {
     private Listener listener;
-    private MessageDispatcher queue;
+    private MessageDispatcher dispatcher;
     
-	public MessageReceiver(Listener listener, MessageDispatcher queue)
+	public MessageReceiver(Listener listener, MessageDispatcher dispatcher)
     {
         this.listener = listener;
-        this.queue = queue;
+        this.dispatcher = dispatcher;
     }
 
     public void listen()
 	{
 		Message message = listener.listen();
-		queue.send(message);
+		dispatcher.send(message);
 	}
 
 }
