@@ -26,7 +26,7 @@ public class ListenerTest
     private Message expectedMessage;
     
     @Mock
-    private Deserializer deserializer;
+    private Deserializer<Message> deserializer;
     
     @Mock
     private DatagramSocket socket;
@@ -36,7 +36,7 @@ public class ListenerTest
     private DatagramPacket packet = new DatagramPacket(data, 0, null, 0);
     
     @Before
-    public void setup() throws IOException
+    public void setup() throws IOException, ClassNotFoundException
     {
         initMocks(this);
         
@@ -47,7 +47,7 @@ public class ListenerTest
     }
     
     @Test
-    public void shouldReturnObjectInMessage()
+    public void shouldReturnObjectInMessage() throws ClassNotFoundException, IOException
     {
         Message message = underTest.listen();
         

@@ -4,6 +4,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -22,7 +24,7 @@ public class MessageReceiverTest
     private MessageDispatcher dispatcher;
     
 	@Before
-	public void setup()
+	public void setup() throws ClassNotFoundException, IOException
 	{
 	    initMocks(this);
 
@@ -32,7 +34,7 @@ public class MessageReceiverTest
 	}
 	
 	@Test
-	public void shouldSendMessageToHandler()
+	public void shouldSendMessageToHandler() throws ClassNotFoundException, IOException
 	{
 		underTest.listen();
 		

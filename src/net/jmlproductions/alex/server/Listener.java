@@ -6,17 +6,17 @@ import java.net.DatagramSocket;
 
 public class Listener
 {
-    private Deserializer deserializer;
+    private Deserializer<Message> deserializer;
     
     private DatagramSocket socket;
     
-    public Listener(DatagramSocket socket, Deserializer deserializer)
+    public Listener(DatagramSocket socket, Deserializer<Message> deserializer)
     {
         this.socket = socket;
         this.deserializer = deserializer;
     }
 
-    public Message listen()
+    public Message listen() throws ClassNotFoundException, IOException
     {
         DatagramPacket packet = new DatagramPacket(new byte[0], 0);
         try

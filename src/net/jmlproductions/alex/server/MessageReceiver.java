@@ -1,5 +1,7 @@
 package net.jmlproductions.alex.server;
 
+import java.io.IOException;
+
 public class MessageReceiver
 {
     private Listener listener;
@@ -11,7 +13,7 @@ public class MessageReceiver
         this.dispatcher = dispatcher;
     }
 
-    public void listen()
+    public void listen() throws ClassNotFoundException, IOException
 	{
 		Message message = listener.listen();
 		dispatcher.send(message);
