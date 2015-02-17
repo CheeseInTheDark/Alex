@@ -12,6 +12,7 @@ repositories
 
 dependencies
 {
+	compile 'net.jmlproductions:fifty-loops:latest'
 	compile 'com.squareup.dagger:dagger:1.2.2'
 	compile 'com.squareup.dagger:dagger-compiler:1.2.2'
 	testCompile 'org.hamcrest:hamcrest-all:1.3'
