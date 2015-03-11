@@ -37,7 +37,7 @@ public class DeserializerTest implements Serializable
     @Test
     public void shouldDeserializeObject() throws IOException, ClassNotFoundException
     {
-        Deserializer<SerializableObject> underTest = new Deserializer<SerializableObject>();
+        Deserializer underTest = new Deserializer();
         
         SerializableObject result = underTest.deserialize(bytes);
         

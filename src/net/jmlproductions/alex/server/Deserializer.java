@@ -4,11 +4,11 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
-public class Deserializer<T>
+public class Deserializer
 {
 
     @SuppressWarnings("unchecked")
-    public T deserialize(byte[] data) throws ClassNotFoundException, IOException
+    public <T> T deserialize(byte[] data) throws ClassNotFoundException, IOException
     {
         try
         {

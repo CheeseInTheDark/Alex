@@ -3,27 +3,34 @@ package net.jmlproductions.alex.server;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.util.Map;
 
 public class Listener
 {
-    private Deserializer<Message> deserializer;
+    private Deserializer deserializer;
     
     private DatagramSocket socket;
     
-    public Listener(DatagramSocket socket, Deserializer<Message> deserializer)
+    private Map<Class<?>, ? super AlexCommandExecutor<?>> executors;
+    
+    public Listener(DatagramSocket socket, Deserializer deserializer, Map<Class<?>, ? super AlexCommandExecutor<?>> handlers)
     {
         this.socket = socket;
         this.deserializer = deserializer;
+        this.executors = handlers;
     }
 
-    public Message listen() throws ClassNotFoundException, IOException
+    public void listen() throws ClassNotFoundException, IOException
     {
         DatagramPacket packet = new DatagramPacket(new byte[0], 0);
         try
         {
             socket.receive(packet);
         } catch (IOException e) {}
-        return deserializer.deserialize(packet.getData());
+        
+        AlexCommand command = deserializer.deserialize(packet.getData());
+        Object arguments = deserializer.deserialize(command.getSerializedCommand());
+        
+        ((AlexCommandExecutor<?>) executors.get(command.getType())).executeUsing(arguments);
     }
-
 }
