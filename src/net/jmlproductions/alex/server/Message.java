@@ -1,6 +1,5 @@
 package net.jmlproductions.alex.server;
 
-import java.net.InetAddress;
 
 public class Message
 {
@@ -11,7 +10,7 @@ public class Message
         this.recipient = recipient;
     }
 
-    public InetAddress translateDestination(AddressBook addressBook)
+    public AddressWithPort translateDestination(AddressBook addressBook)
     {
         return addressBook.lookup(recipient);
     }

@@ -5,8 +5,6 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-import java.net.InetAddress;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -23,7 +21,7 @@ public class MessageTest
     private AddressBook addressBook;
     
     @Mock
-    private InetAddress expectedAddress;
+    private AddressWithPort expectedAddress;
     
     @Before
     public void setup()
@@ -38,7 +36,7 @@ public class MessageTest
     @Test
     public void shouldTranslateAddress()
     {
-        InetAddress address = underTest.translateDestination(addressBook);
+        AddressWithPort address = underTest.translateDestination(addressBook);
         
         assertThat(address, is(expectedAddress));
     }

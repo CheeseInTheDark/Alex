@@ -24,7 +24,7 @@ public class DeserializerTest implements Serializable
     @Before
     public void setup() throws IOException
     {
-        SerializableObject serializable = new SerializableObject(someData);
+        TestSerializableObject serializable = new TestSerializableObject(someData);
         
         ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
         ObjectOutputStream outputStream = new ObjectOutputStream(byteStream);
@@ -39,25 +39,8 @@ public class DeserializerTest implements Serializable
     {
         Deserializer underTest = new Deserializer();
         
-        SerializableObject result = underTest.deserialize(bytes);
+        TestSerializableObject result = underTest.deserialize(bytes);
         
         assertThat(result.getData(), is(someData));
-    }
-    
-    class SerializableObject implements Serializable 
-    {
-        private static final long serialVersionUID = 1L;
-
-        private Object data;
-        
-        public SerializableObject(Object data)
-        {
-            this.data = data;
-        }
-        
-        public Object getData()
-        {
-            return data;
-        }
     }
 }

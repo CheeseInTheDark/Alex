@@ -4,16 +4,14 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-import java.net.InetAddress;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
 
-public class MessageDispatcherTest
+public class MessageExecutorTest
 {
-    private MessageDispatcher underTest;
+    private AlexCommandExecutor<Message> underTest;
     
     @Mock
     private Sender sender;
@@ -25,7 +23,7 @@ public class MessageDispatcherTest
     private AddressBook addressBook;
     
     @Mock
-    private InetAddress address;
+    private AddressWithPort address;
     
     @Before
     public void setup()
@@ -34,13 +32,13 @@ public class MessageDispatcherTest
         
         when(message.translateDestination(addressBook)).thenReturn(address);
 
-        underTest = new MessageDispatcher(sender, addressBook);
+        underTest = new MessageExecutor(sender, addressBook);
     }
     
     @Test
     public void shouldDispatchMessage()
     {
-        underTest.send(message);
+        underTest.executeUsingConvertedArguments(message);
         
         verify(sender).send(message, address);
     }

@@ -3,8 +3,6 @@ package net.jmlproductions.alex.server;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-import java.net.InetAddress;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -22,10 +20,10 @@ public class AddressBookTest
     private AlexUser anotherUser;
     
     @Mock
-    private InetAddress expectedAddress;
+    private AddressWithPort expectedAddress;
     
     @Mock
-    private InetAddress anotherAddress;
+    private AddressWithPort anotherAddress;
     
     @Before
     public void setup()
@@ -41,7 +39,7 @@ public class AddressBookTest
     @Test
     public void shouldRetrieveAddress()
     {
-        InetAddress address = underTest.lookup(user);
+        AddressWithPort address = underTest.lookup(user);
         
         assertThat(address, is(expectedAddress));
     }
@@ -49,7 +47,7 @@ public class AddressBookTest
     @Test
     public void shouldRetrieveADifferentAddress()
     {
-        InetAddress address = underTest.lookup(anotherUser);
+        AddressWithPort address = underTest.lookup(anotherUser);
         
         assertThat(address, is(anotherAddress));
     }
